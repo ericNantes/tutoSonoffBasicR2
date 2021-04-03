@@ -22,17 +22,20 @@ const char index_html[] PROGMEM = R"=====(
         <style>
             h1, h2, h3, p { font: arial;}
             .bouton {
-                font: Arial;
+                font: Arial; color: white; text-align: center; font-size: 16px;
                 background-color: blueviolet;
                 border: none;
-                color: white;
-                padding: 15px 32px;
-                text-align: center;
+                padding: 15px 0px;
                 text-decoration: none;
                 display: inline-block;
-                font-size: 16px;
                 margin: 4px 2px;
-                cursor: pointer;                
+                cursor: pointer;
+                width: 49%;                
+            }
+            @media all and (max-width:30em){
+              .bouton {
+                width: 100%;
+              }
             }
         </style>
     </head>
