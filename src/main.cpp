@@ -93,6 +93,11 @@ void switchOff() {
   serverWeb.send(200, "text/plain", "OFF");
 }
 
+void APOff() {
+  WiFi.enableAP(false);
+  serverWeb.send(200, "text/plain", "Access Point Off.");
+}
+
 void setup() {
   // Liste des IP pour une configuration en IP Fixe
   IPAddress ip(192, 168, 0, IP_MODULE);
@@ -113,7 +118,8 @@ void setup() {
   digitalWrite(PIN_RELAI, LOW);
 
   // Mode de connexion
-  WiFi.mode(WIFI_STA);
+  WiFi.softAP("Module Sonoff Basic R2");
+  WiFi.mode(WIFI_AP_STA);
  
   // Démarrage de la connexion
   WiFi.config(ip, gateway, subnet, dns);
@@ -125,6 +131,7 @@ void setup() {
   // Mise en place du serveur WebServer
   serverWeb.on("/switchOn", switchOn);
   serverWeb.on("/switchOff", switchOff);
+  serverWeb.on("/APOff", APOff);
   serverWeb.on("/", handleRoot);
   serverWeb.on("/index.html", handleRoot);
   serverWeb.begin();
