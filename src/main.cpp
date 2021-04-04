@@ -18,33 +18,48 @@ const char index_html[] PROGMEM = R"=====(
 <html lang="fr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Commande module SONOFF BASIC R2</title>
         <style>
-            h1, h2, h3, p { font: arial;}
-            .bouton {
-                font: Arial; color: white; text-align: center; font-size: 16px;
-                background-color: blueviolet;
-                border: none;
-                padding: 15px 0px;
-                text-decoration: none;
-                display: inline-block;
-                margin: 4px 2px;
-                cursor: pointer;
-                width: 49%;                
-            }
-            @media all and (max-width:30em){
-              .bouton {
-                width: 100%;
-              }
-            }
+* {
+  box-sizing: border-box;
+}
+          h1, h2 { font: 3em Arial; }
+          /* 2 colonnes flottantes côte à côte */
+          .column {
+            float: left;
+            width: 50%;
+            padding: 5px;
+          }
+
+          .row:after { content: ""; display: table; clear: both; }
+
+          /* 1 seule colonne sur les petits écrans */
+          @media screen and (max-width: 720px) {
+            .column { width: 100%; }
+          }
+          .bouton {
+              font: 3em Arial; color: white; text-align: center; text-decoration: none;
+              background-color: blueviolet;
+              border: 1px; border-radius: 3px;
+              padding: 5px 0px; display: inline-block; margin: 4px 2px;
+              cursor: pointer;
+              width: 100%;               
+          }
         </style>
     </head>
     <body>
         <h1 id="etatSonoffBasic">Etat du module : %ETAT_SONOFF%</h1>
         
         <h1>Commande du module</h1>
-        <button class="bouton" onclick="appelServeur('/switchOn', traiteReponse)">Allumer</button>
-        <button class="bouton" onclick="appelServeur('/switchOff', traiteReponse)">Eteindre</button>
+        <div class="row">
+          <div class="column">
+            <button class="bouton" onclick="appelServeur('/switchOn', traiteReponse)">Allumer</button>
+          </div>
+          <div class="column">
+            <button class="bouton" onclick="appelServeur('/switchOff', traiteReponse)">Eteindre</button>
+          </div>
+        </div>
 
         <script>
             function appelServeur(url, cFonction) {
