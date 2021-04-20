@@ -153,6 +153,9 @@ void setup() {
   serverWeb.on("/", handleRoot);
   serverWeb.on("/index.html", handleRoot);
   serverWeb.begin();
+
+  // Nom pour l'OTA
+  ArduinoOTA.setHostname("Module Sonoff Basic R2");
 }
 
 void loop() {
